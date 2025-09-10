@@ -129,6 +129,9 @@
       ],
       "folders": []
     }
-  ]
-  
+  ],
+
+  "url": "https://github.com/brunocalado/the-void-unofficial",
+  "manifest": "https://raw.githubusercontent.com/brunocalado/the-void-unofficial/main/module.json",
+  "download": "https://codeload.github.com/brunocalado/the-void-unofficial/zip/main"  
 }
