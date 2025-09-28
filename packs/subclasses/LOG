@@ -1,3 +1,21 @@
-2025/09/16-10:00:51.852 2d80 Recovering log #486
-2025/09/16-10:00:51.854 2d80 Delete type=0 #486
-2025/09/16-10:00:51.855 2d80 Delete type=3 #485
+2025/09/28-14:55:55.097 2774 Recovering log #537
+2025/09/28-14:55:55.103 2774 Delete type=0 #537
+2025/09/28-14:55:55.103 2774 Delete type=3 #536
+2025/09/28-15:07:53.615 221c Level-0 table #541: started
+2025/09/28-15:07:53.615 221c Level-0 table #541: 0 bytes OK
+2025/09/28-15:07:53.616 221c Delete type=0 #539
+2025/09/28-15:07:53.619 221c Manual compaction at level-0 from '!folders!37B1HLu8gv8sSDNI' @ 72057594037927935 : 1 .. '!items.effects!dnoz8nrt9YwBXGpG.0JcKDuNPUlv4Avbc' @ 0 : 0; will stop at '!items.effects!Ml0J1AIRZybDEVB3.iKkLKp5rPtl6A0Lc' @ 412 : 1
+2025/09/28-15:07:53.619 221c Compacting 1@0 + 0@1 files
+2025/09/28-15:07:53.620 221c Generated table #542@0: 4 keys, 1907 bytes
+2025/09/28-15:07:53.620 221c Compacted 1@0 + 0@1 files => 1907 bytes
+2025/09/28-15:07:53.622 221c compacted to: files[ 0 1 1 0 0 0 0 ]
+2025/09/28-15:07:53.622 221c Delete type=2 #534
+2025/09/28-15:07:53.622 221c Manual compaction at level-0 from '!items.effects!Ml0J1AIRZybDEVB3.iKkLKp5rPtl6A0Lc' @ 412 : 1 .. '!items.effects!dnoz8nrt9YwBXGpG.0JcKDuNPUlv4Avbc' @ 0 : 0; will stop at (end)
+2025/09/28-15:07:53.622 221c Manual compaction at level-1 from '!folders!37B1HLu8gv8sSDNI' @ 72057594037927935 : 1 .. '!items.effects!dnoz8nrt9YwBXGpG.0JcKDuNPUlv4Avbc' @ 0 : 0; will stop at '!items.effects!Ml0J1AIRZybDEVB3.iKkLKp5rPtl6A0Lc' @ 412 : 1
+2025/09/28-15:07:53.622 221c Compacting 1@1 + 1@2 files
+2025/09/28-15:07:53.624 221c Generated table #543@1: 104 keys, 40597 bytes
+2025/09/28-15:07:53.624 221c Compacted 1@1 + 1@2 files => 40597 bytes
+2025/09/28-15:07:53.625 221c compacted to: files[ 0 0 1 0 0 0 0 ]
+2025/09/28-15:07:53.625 221c Delete type=2 #450
+2025/09/28-15:07:53.625 221c Delete type=2 #542
+2025/09/28-15:07:53.629 221c Manual compaction at level-1 from '!items.effects!Ml0J1AIRZybDEVB3.iKkLKp5rPtl6A0Lc' @ 412 : 1 .. '!items.effects!dnoz8nrt9YwBXGpG.0JcKDuNPUlv4Avbc' @ 0 : 0; will stop at (end)

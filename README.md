@@ -22,6 +22,10 @@ You can read about changes at [CHANGELOG](CHANGELOG.md)
 # License
 The material is not included in the SRD but is included in the License and can be shared. 
 ```
+Daggerheart is a trademark of Darrington Press LLC. All original content, mechanics, and intellectual property related to the Daggerheart roleplaying game are © Darrington Press LLC.This project is intended for personal or non-commercial use. All rights to Daggerheart’s original materials remain with their respective owners.
+```
+
+```
 For Playtest Materials, no commercial products are permitted in any format, regardless of whether it is a Permitted Format identified above or some other format.
 ```
 Read more at [https://darringtonpress.com/license/](https://darringtonpress.com/license/)
