@@ -3,6 +3,10 @@ This module is not official. This is a fanmade work.
 
 The content in this module is from [https://www.daggerheart.com/thevoid/](https://www.daggerheart.com/thevoid/).
 
+<p align="center">
+  <img width="600" src="images/preview.webp">
+</p>
+
 # Manual Instalation
 Go to **modules** and paste the link. 
 Link: https://raw.githubusercontent.com/brunocalado/the-void-unofficial/main/module.json
