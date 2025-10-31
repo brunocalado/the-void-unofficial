@@ -11,14 +11,19 @@ The content in this module is from [https://www.daggerheart.com/thevoid/](https:
 Go to **modules** and paste the link. 
 Link: https://raw.githubusercontent.com/brunocalado/the-void-unofficial/main/module.json
 
-# Dread Domain
-You must configure the Dread domain in the system.
+# Blood and Dread Domain
+You must configure the Blood and Dread domain in the system.
 1. Enter Configure Settings
 2. Click Daggerheart
 3. Click Configure Homebrew
 4. Click Domains.
 5. Add a homebrew domain with the name: Dread
-6. Save and reload.
+6. Add a homebrew domain with the name: Blood
+7. Save and reload.
+
+<p align="center">
+  <img width="600" src="images/domains.webp">
+</p>
 
 # Changelog
 You can read about changes at [CHANGELOG](CHANGELOG.md)
