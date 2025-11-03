@@ -1,3 +1,6 @@
+# 1.1.0
+- fix brawler attack
+
 # 1.0.9
 - blood hunter fix
 

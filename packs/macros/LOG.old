@@ -1,3 +1,8 @@
-2025/10/31-17:33:50.643 2164 Recovering log #444
-2025/10/31-17:33:50.645 2164 Delete type=0 #444
-2025/10/31-17:33:50.645 2164 Delete type=3 #442
+2025/11/03-10:48:30.971 3ddc Recovering log #447
+2025/11/03-10:48:30.975 3ddc Delete type=0 #447
+2025/11/03-10:48:30.975 3ddc Delete type=3 #446
+2025/11/03-10:51:04.691 316c Level-0 table #451: started
+2025/11/03-10:51:04.692 316c Level-0 table #451: 0 bytes OK
+2025/11/03-10:51:04.693 316c Delete type=0 #449
+2025/11/03-10:51:04.694 316c Manual compaction at level-0 from '!macros!dGt3g1M1CBZNSSYd' @ 72057594037927935 : 1 .. '!macros!dGt3g1M1CBZNSSYd' @ 0 : 0; will stop at (end)
+2025/11/03-10:51:04.694 316c Manual compaction at level-1 from '!macros!dGt3g1M1CBZNSSYd' @ 72057594037927935 : 1 .. '!macros!dGt3g1M1CBZNSSYd' @ 0 : 0; will stop at (end)
