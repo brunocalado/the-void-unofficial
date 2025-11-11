@@ -1,3 +1,6 @@
+# 1.1.1
+- fix for the system
+
 # 1.1.0
 - fix brawler attack
 
