@@ -1,3 +1,6 @@
+# 1.1.2
+- brawler weapon improv
+
 # 1.1.1
 - fix for the system
 
