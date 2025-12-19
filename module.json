@@ -6,6 +6,9 @@
     "minimum": "13",
     "verified": "13"
   },
+  "esmodules": [
+    "scripts/module.js"
+  ],
   "packs": [
     {
       "name": "classes",
@@ -108,9 +111,8 @@
         "PLAYER": "NONE",
         "ASSISTANT": "OWNER"
       }
-    }    
+    }
   ],
-
   "packFolders": [
     {
       "name": "The Void",
@@ -130,8 +132,7 @@
       "folders": []
     }
   ],
-
   "url": "https://github.com/brunocalado/the-void-unofficial",
   "manifest": "https://raw.githubusercontent.com/brunocalado/the-void-unofficial/main/module.json",
-  "download": "https://codeload.github.com/brunocalado/the-void-unofficial/zip/main"  
+  "download": "https://codeload.github.com/brunocalado/the-void-unofficial/zip/main"
 }
