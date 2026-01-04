@@ -1,3 +1,6 @@
+# 1.1.5
+- Redcap updated difficult
+
 # 1.1.4
 - removed homebrew ancestry
 - added adversary features compendium for Adversary Manager module.

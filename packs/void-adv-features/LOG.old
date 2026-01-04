@@ -1,0 +1,5 @@
+2026/01/04-19:16:13.156 4b94 Delete type=3 #1
+2026/01/04-19:20:51.151 dfc Level-0 table #5: started
+2026/01/04-19:20:51.154 dfc Level-0 table #5: 51634 bytes OK
+2026/01/04-19:20:51.155 dfc Delete type=0 #3
+2026/01/04-19:20:51.156 dfc Manual compaction at level-0 from '!folders!1U6nWmP9yamsU0jl' @ 72057594037927935 : 1 .. '!items.effects!mIAiUmuy1c7nWBlx.jVBdXomOerfUEf6k' @ 0 : 0; will stop at (end)

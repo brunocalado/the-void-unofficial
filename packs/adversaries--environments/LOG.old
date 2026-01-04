@@ -1,8 +1,8 @@
-2026/01/04-19:05:17.447 34a4 Recovering log #1069
-2026/01/04-19:05:17.450 34a4 Delete type=0 #1069
-2026/01/04-19:05:17.450 34a4 Delete type=3 #1067
-2026/01/04-19:16:03.754 dfc Level-0 table #1074: started
-2026/01/04-19:16:03.754 dfc Level-0 table #1074: 0 bytes OK
-2026/01/04-19:16:03.755 dfc Delete type=0 #1072
-2026/01/04-19:16:03.756 dfc Manual compaction at level-0 from '!actors!0IWZIrFaZeDruAl7' @ 72057594037927935 : 1 .. '!folders!lltllvKCpD1MamXV' @ 0 : 0; will stop at (end)
-2026/01/04-19:16:03.756 dfc Manual compaction at level-1 from '!actors!0IWZIrFaZeDruAl7' @ 72057594037927935 : 1 .. '!folders!lltllvKCpD1MamXV' @ 0 : 0; will stop at (end)
+2026/01/04-19:16:13.142 624 Recovering log #1073
+2026/01/04-19:16:13.145 624 Delete type=0 #1073
+2026/01/04-19:16:13.145 624 Delete type=3 #1071
+2026/01/04-19:20:51.150 dfc Level-0 table #1078: started
+2026/01/04-19:20:51.150 dfc Level-0 table #1078: 0 bytes OK
+2026/01/04-19:20:51.151 dfc Delete type=0 #1076
+2026/01/04-19:20:51.156 dfc Manual compaction at level-0 from '!actors!0IWZIrFaZeDruAl7' @ 72057594037927935 : 1 .. '!folders!lltllvKCpD1MamXV' @ 0 : 0; will stop at (end)
+2026/01/04-19:20:51.156 dfc Manual compaction at level-1 from '!actors!0IWZIrFaZeDruAl7' @ 72057594037927935 : 1 .. '!folders!lltllvKCpD1MamXV' @ 0 : 0; will stop at (end)

@@ -1,8 +1,8 @@
-2026/01/04-19:05:17.441 4860 Recovering log #1160
-2026/01/04-19:05:17.444 4860 Delete type=0 #1160
-2026/01/04-19:05:17.444 4860 Delete type=3 #1158
-2026/01/04-19:16:03.751 dfc Level-0 table #1165: started
-2026/01/04-19:16:03.751 dfc Level-0 table #1165: 0 bytes OK
-2026/01/04-19:16:03.752 dfc Delete type=0 #1163
-2026/01/04-19:16:03.756 dfc Manual compaction at level-0 from '!macros!dGt3g1M1CBZNSSYd' @ 72057594037927935 : 1 .. '!macros!dGt3g1M1CBZNSSYd' @ 0 : 0; will stop at (end)
-2026/01/04-19:16:03.756 dfc Manual compaction at level-1 from '!macros!dGt3g1M1CBZNSSYd' @ 72057594037927935 : 1 .. '!macros!dGt3g1M1CBZNSSYd' @ 0 : 0; will stop at (end)
+2026/01/04-19:16:13.134 4b94 Recovering log #1164
+2026/01/04-19:16:13.138 4b94 Delete type=0 #1164
+2026/01/04-19:16:13.138 4b94 Delete type=3 #1162
+2026/01/04-19:20:51.149 dfc Level-0 table #1169: started
+2026/01/04-19:20:51.149 dfc Level-0 table #1169: 0 bytes OK
+2026/01/04-19:20:51.150 dfc Delete type=0 #1167
+2026/01/04-19:20:51.156 dfc Manual compaction at level-0 from '!macros!dGt3g1M1CBZNSSYd' @ 72057594037927935 : 1 .. '!macros!dGt3g1M1CBZNSSYd' @ 0 : 0; will stop at (end)
+2026/01/04-19:20:51.156 dfc Manual compaction at level-1 from '!macros!dGt3g1M1CBZNSSYd' @ 72057594037927935 : 1 .. '!macros!dGt3g1M1CBZNSSYd' @ 0 : 0; will stop at (end)
