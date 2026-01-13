@@ -4,12 +4,16 @@ This module is not official. This is a fanmade work.
 The content in this module is from [https://www.daggerheart.com/thevoid/](https://www.daggerheart.com/thevoid/).
 
 <p align="center">
-  <img width="800" src="images/preview.webp">
+  <img width="800" src="docs/preview.webp">
 </p>
 
 # Manual Instalation
+
 Go to **modules** and paste the link. 
-Link: https://raw.githubusercontent.com/brunocalado/the-void-unofficial/main/module.json
+
+```js
+https://raw.githubusercontent.com/brunocalado/the-void-unofficial/main/module.json
+```
 
 # Changelog
 You can read about changes at [CHANGELOG](CHANGELOG.md)

@@ -1,3 +1,9 @@
+# 1.1.6
+- dread icons fixed
+- combo strikes macro improved
+- domain icons fix (delete the custom domains, it will create again)
+- Umbra Veil added resources
+
 # 1.1.5
 - Redcap updated difficult
 

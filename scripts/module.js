@@ -1,7 +1,21 @@
+// Import generic features from the library file
+import * as VoidFeatures from './features.js';
+
 const MODULE_ID = 'the-void-unofficial';
+
+console.log(`${MODULE_ID} | Module JS Loaded`);
 
 Hooks.once('init', () => {
     console.log(`${MODULE_ID} | Initializing The Void (Unofficial)`);
+
+    // Expose the Void features globally
+    // This allows Void.ComboStrikes(), Void.NewFunction(), etc.
+    window.Void = window.Void || {};
+    
+    // Assign all exported functions from features.js to window.Void
+    Object.assign(window.Void, VoidFeatures);
+    
+    console.log(`${MODULE_ID} | Void features registered:`, Object.keys(VoidFeatures));
 });
 
 Hooks.on('ready', async () => {
@@ -40,13 +54,13 @@ async function registerVoidDomains() {
         'blood': {
             id: 'blood',
             label: 'Blood',
-            src: `modules/${MODULE_ID}/images/domains-icons/blood.webp`,
+            src: `icons/svg/blood.svg`,
             description: 'The Blood domain.'
         },
         'dread': {
             id: 'dread',
             label: 'Dread',
-            src: `modules/${MODULE_ID}/images/dread.webp`,
+            src: `icons/svg/terror.svg`,
             description: 'The Dread domain.'
         }
     };
