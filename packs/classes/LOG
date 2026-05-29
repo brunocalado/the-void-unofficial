@@ -1,8 +1,15 @@
-2026/01/13-09:33:41.300 51ac Recovering log #2016
-2026/01/13-09:33:41.303 51ac Delete type=0 #2016
-2026/01/13-09:33:41.303 51ac Delete type=3 #2014
-2026/01/13-09:35:48.616 4a14 Level-0 table #2021: started
-2026/01/13-09:35:48.616 4a14 Level-0 table #2021: 0 bytes OK
-2026/01/13-09:35:48.617 4a14 Delete type=0 #2019
-2026/01/13-09:35:48.618 4a14 Manual compaction at level-0 from '!folders!7v4rk8aUOc9l81kD' @ 72057594037927935 : 1 .. '!items.effects!otb0ThXWuqQzzWho.m8FpjPisLRkUpcaD' @ 0 : 0; will stop at (end)
-2026/01/13-09:35:48.618 4a14 Manual compaction at level-1 from '!folders!7v4rk8aUOc9l81kD' @ 72057594037927935 : 1 .. '!items.effects!otb0ThXWuqQzzWho.m8FpjPisLRkUpcaD' @ 0 : 0; will stop at (end)
+2026/05/29-19:35:42.029 884 Recovering log #3092
+2026/05/29-19:35:42.032 884 Delete type=0 #3092
+2026/05/29-19:35:42.032 884 Delete type=3 #3090
+2026/05/29-19:37:03.603 2848 Level-0 table #3097: started
+2026/05/29-19:37:03.605 2848 Level-0 table #3097: 6268 bytes OK
+2026/05/29-19:37:03.606 2848 Delete type=0 #3095
+2026/05/29-19:37:03.610 2848 Manual compaction at level-0 from '!folders!7v4rk8aUOc9l81kD' @ 72057594037927935 : 1 .. '!items.effects!otb0ThXWuqQzzWho.m8FpjPisLRkUpcaD' @ 0 : 0; will stop at (end)
+2026/05/29-19:37:03.610 2848 Manual compaction at level-1 from '!folders!7v4rk8aUOc9l81kD' @ 72057594037927935 : 1 .. '!items.effects!otb0ThXWuqQzzWho.m8FpjPisLRkUpcaD' @ 0 : 0; will stop at '!items.effects!otb0ThXWuqQzzWho.m8FpjPisLRkUpcaD' @ 380 : 1
+2026/05/29-19:37:03.610 2848 Compacting 1@1 + 1@2 files
+2026/05/29-19:37:03.612 2848 Generated table #3098@1: 55 keys, 31812 bytes
+2026/05/29-19:37:03.612 2848 Compacted 1@1 + 1@2 files => 31812 bytes
+2026/05/29-19:37:03.613 2848 compacted to: files[ 0 0 1 0 0 0 0 ]
+2026/05/29-19:37:03.613 2848 Delete type=2 #847
+2026/05/29-19:37:03.613 2848 Delete type=2 #3097
+2026/05/29-19:37:03.621 2848 Manual compaction at level-1 from '!items.effects!otb0ThXWuqQzzWho.m8FpjPisLRkUpcaD' @ 380 : 1 .. '!items.effects!otb0ThXWuqQzzWho.m8FpjPisLRkUpcaD' @ 0 : 0; will stop at (end)

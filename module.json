@@ -1,27 +1,28 @@
 {
   "id": "the-void-unofficial",
   "title": "The Void (Unofficial) - Daggerheart",
-  "version": "1.1.6",
+  "version": "1.2.0",
   "compatibility": {
-    "minimum": "13",
-    "verified": "13"
+    "minimum": "14",
+    "verified": "14"
   },
+  
   "esmodules": [
     "scripts/module.js"
   ],
-
+  
   "relationships": {
     "systems": [
       {
         "id": "daggerheart",
         "type": "system",
         "compatibility": {
-          "minimum": "1.4.4"
+          "minimum": "2.2.7"
         }
       }
     ]
-  },   
-
+  },
+  
   "description": "Playtest the Void content!",
   
   "packs": [
@@ -34,7 +35,8 @@
       "ownership": {
         "PLAYER": "OBSERVER",
         "ASSISTANT": "OWNER"
-      }
+      },
+      "flags": {}
     },
     {
       "name": "subclasses",
@@ -45,7 +47,8 @@
       "ownership": {
         "PLAYER": "OBSERVER",
         "ASSISTANT": "OWNER"
-      }
+      },
+      "flags": {}
     },
     {
       "name": "ancestries",
@@ -56,7 +59,8 @@
       "ownership": {
         "PLAYER": "OBSERVER",
         "ASSISTANT": "OWNER"
-      }
+      },
+      "flags": {}
     },
     {
       "name": "communities",
@@ -67,7 +71,8 @@
       "ownership": {
         "PLAYER": "OBSERVER",
         "ASSISTANT": "OWNER"
-      }
+      },
+      "flags": {}
     },
     {
       "name": "domains",
@@ -78,7 +83,8 @@
         "PLAYER": "OBSERVER",
         "ASSISTANT": "OWNER"
       },
-      "system": "daggerheart"
+      "system": "daggerheart",
+      "flags": {}
     },
     {
       "label": "Transformations",
@@ -125,7 +131,8 @@
       "ownership": {
         "PLAYER": "NONE",
         "ASSISTANT": "OWNER"
-      }
+      },
+      "flags": {}
     },
     {
       "name": "void-adv-features",
@@ -136,10 +143,10 @@
       "ownership": {
         "PLAYER": "NONE",
         "ASSISTANT": "OWNER"
-      }
-    }    
+      },
+      "flags": {}
+    }
   ],
-  
   "packFolders": [
     {
       "name": "The Void",
@@ -162,5 +169,6 @@
   ],
   "url": "https://github.com/brunocalado/the-void-unofficial",
   "manifest": "https://raw.githubusercontent.com/brunocalado/the-void-unofficial/main/module.json",
-  "download": "https://codeload.github.com/brunocalado/the-void-unofficial/zip/main"
+  "download": "https://codeload.github.com/brunocalado/the-void-unofficial/zip/main",
+  "flags": {}
 }
