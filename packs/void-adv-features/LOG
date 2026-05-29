@@ -1,15 +1,8 @@
-2026/05/29-19:35:42.108 1848 Recovering log #1586
-2026/05/29-19:35:42.114 1848 Delete type=0 #1586
-2026/05/29-19:35:42.114 1848 Delete type=3 #1584
-2026/05/29-19:37:03.644 2848 Level-0 table #1591: started
-2026/05/29-19:37:03.646 2848 Level-0 table #1591: 4414 bytes OK
-2026/05/29-19:37:03.647 2848 Delete type=0 #1589
-2026/05/29-19:37:03.650 2848 Manual compaction at level-0 from '!folders!1U6nWmP9yamsU0jl' @ 72057594037927935 : 1 .. '!items.effects!mIAiUmuy1c7nWBlx.jVBdXomOerfUEf6k' @ 0 : 0; will stop at (end)
-2026/05/29-19:37:03.650 2848 Manual compaction at level-1 from '!folders!1U6nWmP9yamsU0jl' @ 72057594037927935 : 1 .. '!items.effects!mIAiUmuy1c7nWBlx.jVBdXomOerfUEf6k' @ 0 : 0; will stop at '!items.effects!mIAiUmuy1c7nWBlx.jVBdXomOerfUEf6k' @ 109 : 1
-2026/05/29-19:37:03.651 2848 Compacting 1@1 + 1@2 files
-2026/05/29-19:37:03.653 2848 Generated table #1592@1: 97 keys, 51621 bytes
-2026/05/29-19:37:03.653 2848 Compacted 1@1 + 1@2 files => 51621 bytes
-2026/05/29-19:37:03.654 2848 compacted to: files[ 0 0 1 0 0 0 0 ]
-2026/05/29-19:37:03.654 2848 Delete type=2 #5
-2026/05/29-19:37:03.654 2848 Delete type=2 #1591
-2026/05/29-19:37:03.657 2848 Manual compaction at level-1 from '!items.effects!mIAiUmuy1c7nWBlx.jVBdXomOerfUEf6k' @ 109 : 1 .. '!items.effects!mIAiUmuy1c7nWBlx.jVBdXomOerfUEf6k' @ 0 : 0; will stop at (end)
+2026/05/29-20:08:08.302 dec Recovering log #1603
+2026/05/29-20:08:08.305 dec Delete type=0 #1603
+2026/05/29-20:08:08.305 dec Delete type=3 #1601
+2026/05/29-20:10:00.299 2848 Level-0 table #1608: started
+2026/05/29-20:10:00.299 2848 Level-0 table #1608: 0 bytes OK
+2026/05/29-20:10:00.300 2848 Delete type=0 #1606
+2026/05/29-20:10:00.302 2848 Manual compaction at level-0 from '!folders!1U6nWmP9yamsU0jl' @ 72057594037927935 : 1 .. '!items.effects!mIAiUmuy1c7nWBlx.jVBdXomOerfUEf6k' @ 0 : 0; will stop at (end)
+2026/05/29-20:10:00.302 2848 Manual compaction at level-1 from '!folders!1U6nWmP9yamsU0jl' @ 72057594037927935 : 1 .. '!items.effects!mIAiUmuy1c7nWBlx.jVBdXomOerfUEf6k' @ 0 : 0; will stop at (end)

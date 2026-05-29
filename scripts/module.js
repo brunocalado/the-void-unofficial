@@ -1,111 +1,69 @@
-// Import generic features from the library file
 import * as VoidFeatures from './features.js';
-
-const MODULE_ID = 'the-void-unofficial';
+import { MODULE_ID } from './constants.js';
 
 console.log(`${MODULE_ID} | Module JS Loaded`);
 
 Hooks.once('init', () => {
     console.log(`${MODULE_ID} | Initializing The Void (Unofficial)`);
 
-    // Expose the Void features globally
-    // This allows Void.ComboStrikes(), Void.NewFunction(), etc.
     window.Void = window.Void || {};
-    
-    // Assign all exported functions from features.js to window.Void
     Object.assign(window.Void, VoidFeatures);
-    
+
     console.log(`${MODULE_ID} | Void features registered:`, Object.keys(VoidFeatures));
 });
 
 Hooks.on('ready', async () => {
-    // Only run if the system is Daggerheart
     if (game.system.id !== 'daggerheart') return;
-
-    // Register Blood and Dread domains in system settings
     await registerVoidDomains();
 });
 
+/**
+ * Registers Blood and Dread as homebrew domains in the Daggerheart system settings.
+ * Skips any domain that is already present to avoid duplicates.
+ *
+ * The Daggerheart 'Homebrew' setting is a DhHomebrew DataModel instance.
+ * We must call .toObject() before spreading to obtain a plain JSON-serializable
+ * representation — spreading the DataModel instance directly omits nested fields
+ * (restMoves, adversaryTypes, resources, etc.) that are not enumerable own properties,
+ * which would silently wipe the system's default downtime actions on save.
+ *
+ * @returns {Promise<void>}
+ */
 async function registerVoidDomains() {
-    // Access Daggerheart Homebrew Settings
-    // The system stores homebrew config in a setting named 'Homebrew' (case sensitive check needed)
-    // Based on homebrewSettings.mjs:
-    // game.settings.get(CONFIG.DH.id, CONFIG.DH.SETTINGS.gameSettings.Homebrew)
-    // where CONFIG.DH.id is 'daggerheart' and CONFIG.DH.SETTINGS.gameSettings.Homebrew is likely 'Homebrew' or 'homebrew'.
-    // Let's safe check both or retrieve via CONFIG if possible, but we don't have CONFIG in this script context easily checked without running it.
-    // However, usually it's 'homebrew'.
-
-    // Check if the setting exists
     let homebrewSettings;
     try {
         homebrewSettings = game.settings.get('daggerheart', 'Homebrew');
     } catch (e) {
-        try {
-            homebrewSettings = game.settings.get('daggerheart', 'homebrew');
-        } catch (e2) {
-            console.warn(`${MODULE_ID} | Could not find Daggerheart 'Homebrew' or 'homebrew' setting.`);
-            return;
-        }
+        console.warn(`${MODULE_ID} | Could not read Daggerheart 'Homebrew' setting.`, e);
+        return;
     }
 
     if (!homebrewSettings) return;
 
     const domainData = {
-        'blood': {
-            id: 'blood',
-            label: 'Blood',
-            src: `icons/svg/blood.svg`,
-            description: 'The Blood domain.'
-        },
-        'dread': {
-            id: 'dread',
-            label: 'Dread',
-            src: `icons/svg/terror.svg`,
-            description: 'The Dread domain.'
-        }
+        blood: { id: 'blood', label: 'Blood', src: 'icons/svg/blood.svg', description: 'The Blood domain.' },
+        dread: { id: 'dread', label: 'Dread', src: 'icons/svg/terror.svg', description: 'The Dread domain.' }
     };
 
-    let updates = false;
-    // user domains are in homebrewSettings.domains
-    const currentDomains = { ...(homebrewSettings.domains || {}) };
+    // Convert the DataModel instance to a plain object so all nested fields are preserved.
+    const plain = homebrewSettings.toObject();
+    const currentDomains = { ...(plain.domains || {}) };
 
+    let hasUpdates = false;
     for (const [key, data] of Object.entries(domainData)) {
         if (!currentDomains[key]) {
             console.log(`${MODULE_ID} | Registering missing domain: ${data.label}`);
             currentDomains[key] = data;
-            updates = true;
+            hasUpdates = true;
         }
     }
 
-    if (updates) {
-        // Update the setting
-        // We know we got homebrewSettings, we just update it.
-        try {
-            // We need to keep the structure of homebrewSettings intact (it has 'domains', 'adversaryTypes', etc.)
-            const newSettings = {
-                ...homebrewSettings,
-                domains: currentDomains
-            };
+    if (!hasUpdates) return;
 
-            // We need to know the Key used to set it.
-            // If get('daggerheart', 'Homebrew') worked, key is 'Homebrew'.
-            // Simplest way is iterate keys? No.
-            // Let's assume 'Homebrew' based on common Foundry patterns if capital H was used in class name, 
-            // but 'homebrewSettings' variable is the object.
-
-            // Ideally we'd use the same key we succeeded with.
-            // I'll assume 'Homebrew' is the primary guess as per my check order, 
-            // but actually strict safely requires trying the same key.
-
-            // Re-fetch logic or just use a helper variable for the key.
-            let key = 'Homebrew';
-            if (game.settings.settings.has('daggerheart.homebrew')) key = 'homebrew';
-
-            await game.settings.set('daggerheart', key, newSettings);
-
-            ui.notifications.info(`${MODULE_ID} | Registered missing domains (Blood/Dread) in Homebrew Settings.`);
-        } catch (err) {
-            console.error(`${MODULE_ID} | Failed to update settings:`, err);
-        }
+    try {
+        await game.settings.set('daggerheart', 'Homebrew', { ...plain, domains: currentDomains });
+        ui.notifications.info(`${MODULE_ID} | Registered Blood and Dread domains in Homebrew Settings.`);
+    } catch (err) {
+        console.error(`${MODULE_ID} | Failed to update Homebrew settings:`, err);
     }
 }

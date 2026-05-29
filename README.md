@@ -19,6 +19,10 @@ https://raw.githubusercontent.com/brunocalado/the-void-unofficial/main/module.js
 You can read about changes at [CHANGELOG](CHANGELOG.md)
 
 # License
+
+- Dread: https://unsplash.com/pt-br/fotografias/uma-foto-em-preto-e-branco-de-um-cranio-humano-1PtM6b85sdw
+- Blood: https://unsplash.com/pt-br/fotografias/a-mao-de-uma-pessoa-com-sangue-nela-9KF7A8PJFF8
+
 The material is not included in the SRD but is included in the License and can be shared. 
 ```
 Daggerheart is a trademark of Darrington Press LLC. All original content, mechanics, and intellectual property related to the Daggerheart roleplaying game are © Darrington Press LLC.This project is intended for personal or non-commercial use. All rights to Daggerheart’s original materials remain with their respective owners.

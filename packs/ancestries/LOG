@@ -1,15 +1,8 @@
-2026/05/29-19:35:42.050 dec Recovering log #3072
-2026/05/29-19:35:42.054 dec Delete type=0 #3072
-2026/05/29-19:35:42.054 dec Delete type=3 #3070
-2026/05/29-19:37:03.617 2848 Level-0 table #3077: started
-2026/05/29-19:37:03.618 2848 Level-0 table #3077: 1170 bytes OK
-2026/05/29-19:37:03.619 2848 Delete type=0 #3075
-2026/05/29-19:37:03.621 2848 Manual compaction at level-0 from '!folders!dSAccOl5ccgXPyje' @ 72057594037927935 : 1 .. '!items.effects!sRsezFAnQHJGwp0Z.UFpatriYCNtw7g4S' @ 0 : 0; will stop at (end)
-2026/05/29-19:37:03.621 2848 Manual compaction at level-1 from '!folders!dSAccOl5ccgXPyje' @ 72057594037927935 : 1 .. '!items.effects!sRsezFAnQHJGwp0Z.UFpatriYCNtw7g4S' @ 0 : 0; will stop at '!items.effects!sRsezFAnQHJGwp0Z.UFpatriYCNtw7g4S' @ 254 : 1
-2026/05/29-19:37:03.621 2848 Compacting 1@1 + 1@2 files
-2026/05/29-19:37:03.623 2848 Generated table #3078@1: 20 keys, 7432 bytes
-2026/05/29-19:37:03.623 2848 Compacted 1@1 + 1@2 files => 7432 bytes
-2026/05/29-19:37:03.623 2848 compacted to: files[ 0 0 1 0 0 0 0 ]
-2026/05/29-19:37:03.623 2848 Delete type=2 #1487
-2026/05/29-19:37:03.624 2848 Delete type=2 #3077
-2026/05/29-19:37:03.629 2848 Manual compaction at level-1 from '!items.effects!sRsezFAnQHJGwp0Z.UFpatriYCNtw7g4S' @ 254 : 1 .. '!items.effects!sRsezFAnQHJGwp0Z.UFpatriYCNtw7g4S' @ 0 : 0; will stop at (end)
+2026/05/29-20:08:08.239 884 Recovering log #3089
+2026/05/29-20:08:08.241 884 Delete type=0 #3089
+2026/05/29-20:08:08.243 884 Delete type=3 #3087
+2026/05/29-20:10:00.289 2848 Level-0 table #3094: started
+2026/05/29-20:10:00.289 2848 Level-0 table #3094: 0 bytes OK
+2026/05/29-20:10:00.290 2848 Delete type=0 #3092
+2026/05/29-20:10:00.295 2848 Manual compaction at level-0 from '!folders!dSAccOl5ccgXPyje' @ 72057594037927935 : 1 .. '!items.effects!sRsezFAnQHJGwp0Z.UFpatriYCNtw7g4S' @ 0 : 0; will stop at (end)
+2026/05/29-20:10:00.295 2848 Manual compaction at level-1 from '!folders!dSAccOl5ccgXPyje' @ 72057594037927935 : 1 .. '!items.effects!sRsezFAnQHJGwp0Z.UFpatriYCNtw7g4S' @ 0 : 0; will stop at (end)

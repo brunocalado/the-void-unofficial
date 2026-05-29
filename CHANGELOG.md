@@ -1,3 +1,13 @@
+# 1.2.1
+
+- https://github.com/brunocalado/the-void-unofficial/issues/3
+- removed AI images
+- https://github.com/brunocalado/the-void-unofficial/issues/4
+
+# 1.2.0
+
+- v14 only
+
 # 1.1.6
 - dread icons fixed
 - combo strikes macro improved
