@@ -1,6 +1,6 @@
 # 1.2.2
 
-
+https://github.com/brunocalado/the-void-unofficial/issues/6
 
 # 1.2.1
 
