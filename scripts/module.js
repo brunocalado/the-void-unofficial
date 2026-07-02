@@ -1,5 +1,6 @@
 import * as VoidFeatures from './features.js';
 import { MODULE_ID } from './constants.js';
+import { onRenderActorSheet } from './warlock-favor.js';
 
 console.log(`${MODULE_ID} | Module JS Loaded`);
 
@@ -10,6 +11,10 @@ Hooks.once('init', () => {
     Object.assign(window.Void, VoidFeatures);
 
     console.log(`${MODULE_ID} | Void features registered:`, Object.keys(VoidFeatures));
+});
+
+Hooks.on('renderHandlebarsApplication', (app, element) => {
+    onRenderActorSheet(app, element);
 });
 
 Hooks.on('ready', async () => {

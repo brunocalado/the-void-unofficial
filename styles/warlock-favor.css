@@ -1,0 +1,55 @@
+.the-void-unofficial {
+    --the-void-unofficial-favor-accent: #ad0000;
+
+    &.void-favor-bonus-badge {
+        display: inline-flex;
+        align-items: center;
+        margin-left: 8px;
+        padding: 1px 6px;
+        border: 1px solid var(--the-void-unofficial-favor-accent);
+        border-radius: 4px;
+        background: var(--the-void-unofficial-favor-accent);
+        color: #fff;
+        font-size: var(--font-size-11, 11px);
+        font-weight: bold;
+        white-space: nowrap;
+        vertical-align: middle;
+    }
+
+    &.void-warlock-favor-panel {
+        padding: 4px 8px 6px 50px;
+        font-size: var(--font-size-12, 12px);
+    }
+
+    .void-favor-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .void-favor-sphere-input {
+        flex: 1 1 auto;
+        min-width: 0;
+        height: auto;
+    }
+
+    .void-favor-spheres {
+        display: flex;
+        flex: 0 0 auto;
+        gap: 4px;
+    }
+
+    .void-favor-sphere {
+        cursor: pointer;
+        color: var(--color-text-secondary);
+
+        &.filled {
+            color: var(--the-void-unofficial-favor-accent);
+        }
+
+        &.disabled {
+            cursor: default;
+            pointer-events: none;
+        }
+    }
+}

@@ -9,6 +9,9 @@
   "esmodules": [
     "scripts/module.js"
   ],
+  "styles": [
+    "styles/warlock-favor.css"
+  ],
   "relationships": {
     "systems": [
       {

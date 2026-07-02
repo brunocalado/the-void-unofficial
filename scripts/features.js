@@ -1,3 +1,5 @@
+export { WarlockFavor } from './warlock-favor.js';
+
 /**
  * Main function to execute the Combo Die mechanic.
  * Can be called via Void.ComboStrikes()
