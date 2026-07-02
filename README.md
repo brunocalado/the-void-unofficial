@@ -1,4 +1,5 @@
 # Daggerheart - The Void (Unofficial)
+
 This module is not official. This is a fanmade work.
 
 The content in this module is from [https://www.daggerheart.com/thevoid/](https://www.daggerheart.com/thevoid/).
@@ -6,6 +7,8 @@ The content in this module is from [https://www.daggerheart.com/thevoid/](https:
 <p align="center">
   <img width="800" src="docs/preview.webp">
 </p>
+
+[![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-Donate-red?style=for-the-badge&logo=buy-me-a-coffee)](https://buymeacoffee.com/mestredigital)
 
 # Manual Instalation
 
@@ -16,6 +19,7 @@ https://raw.githubusercontent.com/brunocalado/the-void-unofficial/main/module.js
 ```
 
 # Changelog
+
 You can read about changes at [CHANGELOG](CHANGELOG.md)
 
 # License

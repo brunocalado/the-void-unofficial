@@ -1,16 +1,14 @@
 {
   "id": "the-void-unofficial",
   "title": "The Void (Unofficial) - Daggerheart",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "compatibility": {
     "minimum": "14",
     "verified": "14"
   },
-  
   "esmodules": [
     "scripts/module.js"
   ],
-  
   "relationships": {
     "systems": [
       {
@@ -22,9 +20,7 @@
       }
     ]
   },
-  
   "description": "Playtest the Void content!",
-  
   "packs": [
     {
       "name": "classes",
