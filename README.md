@@ -1,4 +1,4 @@
-# Daggerheart - The Void (Unofficial)
+# Void for Daggerheart
 
 This module is not official. This is a fanmade work.
 
