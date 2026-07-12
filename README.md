@@ -8,7 +8,7 @@ The content in this module is from [https://www.daggerheart.com/thevoid/](https:
   <img width="800" src="docs/preview.webp">
 </p>
 
-[![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-Donate-red?style=for-the-badge&logo=buy-me-a-coffee)](https://buymeacoffee.com/mestredigital)
+[![Buy Me a Coffee](https://img.shields.io/badge/Buy_Me_a_Coffee-Donate-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/mestredigital) [![More Modules](https://img.shields.io/badge/Foundry%20VTT-More%20Modules-red?style=for-the-badge&logo=gamepad)](https://mestredigital.online/pages/projetos-en)
 
 # Manual Instalation
 
@@ -26,6 +26,7 @@ You can read about changes at [CHANGELOG](CHANGELOG.md)
 
 - Dread: https://unsplash.com/pt-br/fotografias/uma-foto-em-preto-e-branco-de-um-cranio-humano-1PtM6b85sdw
 - Blood: https://unsplash.com/pt-br/fotografias/a-mao-de-uma-pessoa-com-sangue-nela-9KF7A8PJFF8
+- Summoner: https://unsplash.com/pt-br/fotografias/um-logotipo-vermelho-e-branco-kqdl9njdrvs
 
 The material is not included in the SRD but is included in the License and can be shared. 
 ```

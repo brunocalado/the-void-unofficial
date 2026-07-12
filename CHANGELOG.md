@@ -1,3 +1,8 @@
+# 1.2.3
+
+- blood_hunter-2026_07_09
+- summoner-2026_07_09
+
 # 1.2.2
 
 https://github.com/brunocalado/the-void-unofficial/issues/6
