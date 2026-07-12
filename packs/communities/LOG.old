@@ -1,8 +1,23 @@
-2026/07/11-20:04:53.667 38e0 Recovering log #3203
-2026/07/11-20:04:53.670 38e0 Delete type=0 #3203
-2026/07/11-20:04:53.670 38e0 Delete type=3 #3201
-2026/07/11-22:02:17.165 2ed4 Level-0 table #3208: started
-2026/07/11-22:02:17.165 2ed4 Level-0 table #3208: 0 bytes OK
-2026/07/11-22:02:17.166 2ed4 Delete type=0 #3206
-2026/07/11-22:02:17.172 2ed4 Manual compaction at level-0 from '!folders!BGcI3g8jqMjoIq7F' @ 72057594037927935 : 1 .. '!items!tkTwPJHo6PCXgjmM' @ 0 : 0; will stop at (end)
-2026/07/11-22:02:17.174 2ed4 Manual compaction at level-1 from '!folders!BGcI3g8jqMjoIq7F' @ 72057594037927935 : 1 .. '!items!tkTwPJHo6PCXgjmM' @ 0 : 0; will stop at (end)
+2026/07/11-22:31:46.055 63f4 Recovering log #3214
+2026/07/11-22:31:46.055 63f4 Level-0 table #3216: started
+2026/07/11-22:31:46.058 63f4 Level-0 table #3216: 4502 bytes OK
+2026/07/11-22:31:46.061 63f4 Delete type=0 #3214
+2026/07/11-22:31:46.061 63f4 Delete type=3 #3213
+2026/07/11-22:32:07.315 50d4 Level-0 table #3219: started
+2026/07/11-22:32:07.315 50d4 Level-0 table #3219: 0 bytes OK
+2026/07/11-22:32:07.316 50d4 Delete type=0 #3217
+2026/07/11-22:32:07.321 50d4 Manual compaction at level-0 from '!folders!BGcI3g8jqMjoIq7F' @ 72057594037927935 : 1 .. '!items!tkTwPJHo6PCXgjmM' @ 0 : 0; will stop at '!items!tkTwPJHo6PCXgjmM' @ 92 : 1
+2026/07/11-22:32:07.321 50d4 Compacting 1@0 + 0@1 files
+2026/07/11-22:32:07.322 50d4 Generated table #3220@0: 12 keys, 4502 bytes
+2026/07/11-22:32:07.322 50d4 Compacted 1@0 + 0@1 files => 4502 bytes
+2026/07/11-22:32:07.323 50d4 compacted to: files[ 0 1 1 0 0 0 0 ]
+2026/07/11-22:32:07.323 50d4 Delete type=2 #3216
+2026/07/11-22:32:07.327 50d4 Manual compaction at level-0 from '!items!tkTwPJHo6PCXgjmM' @ 92 : 1 .. '!items!tkTwPJHo6PCXgjmM' @ 0 : 0; will stop at (end)
+2026/07/11-22:32:07.330 50d4 Manual compaction at level-1 from '!folders!BGcI3g8jqMjoIq7F' @ 72057594037927935 : 1 .. '!items!tkTwPJHo6PCXgjmM' @ 0 : 0; will stop at '!items!tkTwPJHo6PCXgjmM' @ 92 : 1
+2026/07/11-22:32:07.330 50d4 Compacting 1@1 + 1@2 files
+2026/07/11-22:32:07.331 50d4 Generated table #3221@1: 13 keys, 4599 bytes
+2026/07/11-22:32:07.331 50d4 Compacted 1@1 + 1@2 files => 4599 bytes
+2026/07/11-22:32:07.332 50d4 compacted to: files[ 0 0 1 0 0 0 0 ]
+2026/07/11-22:32:07.332 50d4 Delete type=2 #14
+2026/07/11-22:32:07.333 50d4 Delete type=2 #3220
+2026/07/11-22:32:07.336 50d4 Manual compaction at level-1 from '!items!tkTwPJHo6PCXgjmM' @ 92 : 1 .. '!items!tkTwPJHo6PCXgjmM' @ 0 : 0; will stop at (end)

@@ -2,7 +2,7 @@
   "id": "the-void-unofficial",
   "title": "Void for Daggerheart",
   "description": "Playtest the Void content!",  
-  "version": "1.2.3",
+  "version": "1.2.4",
   
   "compatibility": {
     "minimum": "14",
@@ -39,7 +39,8 @@
         "PLAYER": "OBSERVER",
         "ASSISTANT": "OWNER"
       },
-      "flags": {}
+      "flags": {},
+      "banner": "modules/the-void-unofficial/images/banner.webp"
     },
     {
       "name": "subclasses",
@@ -51,7 +52,8 @@
         "PLAYER": "OBSERVER",
         "ASSISTANT": "OWNER"
       },
-      "flags": {}
+      "flags": {},
+      "banner": "modules/the-void-unofficial/images/banner.webp"
     },
     {
       "name": "ancestries",
@@ -63,7 +65,8 @@
         "PLAYER": "OBSERVER",
         "ASSISTANT": "OWNER"
       },
-      "flags": {}
+      "flags": {},
+      "banner": "modules/the-void-unofficial/images/banner.webp"
     },
     {
       "name": "communities",
@@ -75,7 +78,8 @@
         "PLAYER": "OBSERVER",
         "ASSISTANT": "OWNER"
       },
-      "flags": {}
+      "flags": {},
+      "banner": "modules/the-void-unofficial/images/banner.webp"
     },
     {
       "name": "domains",
@@ -87,7 +91,8 @@
         "ASSISTANT": "OWNER"
       },
       "system": "daggerheart",
-      "flags": {}
+      "flags": {},
+      "banner": "modules/the-void-unofficial/images/banner.webp"
     },
     {
       "label": "Transformations",
@@ -99,7 +104,8 @@
         "PLAYER": "OBSERVER",
         "ASSISTANT": "OWNER"
       },
-      "flags": {}
+      "flags": {},
+      "banner": "modules/the-void-unofficial/images/banner.webp"
     },
     {
       "label": "Weapons",
@@ -111,7 +117,8 @@
         "PLAYER": "OBSERVER",
         "ASSISTANT": "OWNER"
       },
-      "flags": {}
+      "flags": {},
+      "banner": "modules/the-void-unofficial/images/banner.webp"
     },
     {
       "label": "Macros",
@@ -123,7 +130,8 @@
         "PLAYER": "OBSERVER",
         "ASSISTANT": "OWNER"
       },
-      "flags": {}
+      "flags": {},
+      "banner": "modules/the-void-unofficial/images/banner.webp"
     },
     {
       "label": "Adversaries / Environments",
@@ -135,7 +143,8 @@
         "PLAYER": "NONE",
         "ASSISTANT": "OWNER"
       },
-      "flags": {}
+      "flags": {},
+      "banner": "modules/the-void-unofficial/images/banner.webp"
     },
     {
       "name": "void-adv-features",
@@ -147,7 +156,8 @@
         "PLAYER": "NONE",
         "ASSISTANT": "OWNER"
       },
-      "flags": {}
+      "flags": {},
+      "banner": "modules/the-void-unofficial/images/banner.webp"
     }
   ],
   "packFolders": [
