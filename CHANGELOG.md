@@ -1,3 +1,7 @@
+# 1.2.5
+
+- blood_hunter-2026_07_09 fix
+
 # 1.2.3
 
 - blood_hunter-2026_07_09
