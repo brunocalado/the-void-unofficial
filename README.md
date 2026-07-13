@@ -18,6 +18,16 @@ Go to **modules** and paste the link.
 https://raw.githubusercontent.com/brunocalado/the-void-unofficial/main/module.json
 ```
 
+# Commands
+
+The module exposes a few commands on the global `Void` object. Call them from a macro or from the console.
+
+| Command | Description |
+| :--- | :--- |
+| `Void.DomainCards("Lifeblood Talisman")` | Runs the effect registered for a domain card. Each card does its own thing — *Lifeblood Talisman* posts a chat card with the talisman, which any player can drag onto their character sheet. |
+| `Void.ComboStrikes()` | Rolls the Brawler's Combo Strike: pick a die, keep rolling while each result is equal to or higher than the last, and post the total damage to chat. |
+| `Void.WarlockFavor()` | Recharges the Warlock's Favor Spheres. |
+
 # Changelog
 
 You can read about changes at [CHANGELOG](CHANGELOG.md)

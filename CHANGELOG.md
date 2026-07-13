@@ -1,3 +1,8 @@
+# 1.2.8
+
+- new `Void.DomainCards()` command, which runs the effect registered for a domain card
+- `Void.DomainCards("Lifeblood Talisman")` posts a chat card with the talisman, so players can drag it onto their sheets
+
 # 1.2.7
 
 - summoner-2026_07_09 fix

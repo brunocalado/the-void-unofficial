@@ -1,4 +1,5 @@
 export { WarlockFavor } from './warlock-favor.js';
+export { DomainCards } from './domain-cards.js';
 
 /**
  * Main function to execute the Combo Die mechanic.
