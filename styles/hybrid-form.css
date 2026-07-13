@@ -1,0 +1,57 @@
+/*!
+ * Daggerheart: Void
+ * Copyright (c) 2026 https://github.com/brunocalado
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 3.
+ */
+
+.the-void-unofficial {
+    --the-void-unofficial-lycan-accent: #ad0000;
+
+    /*
+     * Background and icon colour are pinned in every state: the sheet's own `button:hover`
+     * rule otherwise paints a fill behind the glyph, which then vanishes against it.
+     */
+    &.void-hybrid-form-toggle {
+        display: inline-flex;
+        flex: 0 0 auto;
+        align-items: center;
+        justify-content: center;
+        width: var(--input-height, 26px);
+        height: var(--input-height, 26px);
+        margin: 0 8px;
+        padding: 0;
+        border: 1px solid var(--color-border);
+        border-radius: 4px;
+        background: transparent;
+        box-shadow: none;
+        color: var(--color-text-secondary);
+        line-height: 1;
+        cursor: pointer;
+
+        &:hover:not(:disabled) {
+            border-color: var(--the-void-unofficial-lycan-accent);
+            background: transparent;
+            color: var(--the-void-unofficial-lycan-accent);
+        }
+
+        &.active {
+            border-color: var(--the-void-unofficial-lycan-accent);
+            background: var(--the-void-unofficial-lycan-accent);
+            box-shadow: 0 0 6px var(--the-void-unofficial-lycan-accent);
+            color: var(--color-light-1, #fff);
+        }
+
+        /* Keep the filled look on hover once transformed, so the glyph stays legible. */
+        &.active:hover:not(:disabled) {
+            background: var(--the-void-unofficial-lycan-accent);
+            color: var(--color-light-1, #fff);
+        }
+
+        &:disabled {
+            cursor: default;
+            opacity: 0.5;
+        }
+    }
+}

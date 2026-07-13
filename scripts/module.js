@@ -1,6 +1,7 @@
 import * as VoidFeatures from './features.js';
 import { MODULE_ID } from './constants.js';
-import { onRenderActorSheet } from './warlock-favor.js';
+import { onRenderActorSheet as onRenderWarlockFavor } from './warlock-favor.js';
+import { onRenderActorSheet as onRenderHybridForm, onPreUpdateActor } from './hybrid-form.js';
 
 console.log(`${MODULE_ID} | Module JS Loaded`);
 
@@ -14,7 +15,12 @@ Hooks.once('init', () => {
 });
 
 Hooks.on('renderHandlebarsApplication', (app, element) => {
-    onRenderActorSheet(app, element);
+    onRenderWarlockFavor(app, element);
+    onRenderHybridForm(app, element);
+});
+
+Hooks.on('preUpdateActor', (actor, changed) => {
+    onPreUpdateActor(actor, changed);
 });
 
 Hooks.on('ready', async () => {

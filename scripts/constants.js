@@ -15,3 +15,11 @@ export const WARLOCK_FAVOR_FLAG = 'Warlock Favor';
  * @type {string}
  */
 export const SPHERE_NAME_FLAG = 'sphereName';
+
+/**
+ * Flag key (under this module's scope) marking a "subclass" item as Order of the
+ * Lycan. Written manually on the relevant compendium item — this module only
+ * reads it to identify the subclass, so renaming the item cannot break detection.
+ * @type {string}
+ */
+export const ORDER_OF_THE_LYCAN_FLAG = 'orderOfTheLycan';

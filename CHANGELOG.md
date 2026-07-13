@@ -1,3 +1,8 @@
+# 1.2.6
+
+- blood_hunter-2026_07_09 lycan automation
+- blood_hunter-2026_07_09 fix
+
 # 1.2.5
 
 - blood_hunter-2026_07_09 fix
