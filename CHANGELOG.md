@@ -1,3 +1,7 @@
+# 1.2.7
+
+- summoner-2026_07_09 fix
+
 # 1.2.6
 
 - blood_hunter-2026_07_09 lycan automation
