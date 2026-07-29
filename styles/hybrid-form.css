@@ -39,8 +39,8 @@
         &.active {
             border-color: var(--the-void-unofficial-lycan-accent);
             background: var(--the-void-unofficial-lycan-accent);
-            box-shadow: 0 0 6px var(--the-void-unofficial-lycan-accent);
             color: var(--color-light-1, #fff);
+            animation: the-void-unofficial-hybrid-form-pulse 1.5s ease-in-out infinite;
         }
 
         /* Keep the filled look on hover once transformed, so the glyph stays legible. */
@@ -53,5 +53,15 @@
             cursor: default;
             opacity: 0.5;
         }
+    }
+}
+
+/* Red pulse while transformed — glow breathes rather than sitting static, so the button reads as "active" at a glance. */
+@keyframes the-void-unofficial-hybrid-form-pulse {
+    0%, 100% {
+        box-shadow: 0 0 4px var(--the-void-unofficial-lycan-accent);
+    }
+    50% {
+        box-shadow: 0 0 12px 4px var(--the-void-unofficial-lycan-accent);
     }
 }

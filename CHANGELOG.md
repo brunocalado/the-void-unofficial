@@ -1,3 +1,11 @@
+# 1.2.9
+
+Fixed blood hunter
+improved automation for lycan blood hunter
+- new `Void.HybridForm()` command, toggles the Order of the Lycan's Hybrid Form (same as the wolf button on the character sheet)
+- Hybrid Form now changes the token's image, art scale (1.5x, same grid footprint) and light while transformed, reverting automatically when toggled off; the image is read from a `Set Token Image with {{{path}}}` marker in the Hybrid Form item's description
+- the Hybrid Form button now pulses red while active
+
 # 1.2.8
 
 - new `Void.DomainCards()` command, which runs the effect registered for a domain card

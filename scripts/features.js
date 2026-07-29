@@ -1,5 +1,6 @@
 export { WarlockFavor } from './warlock-favor.js';
 export { DomainCards } from './domain-cards.js';
+export { HybridForm } from './hybrid-form.js';
 
 /**
  * Main function to execute the Combo Die mechanic.

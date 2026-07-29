@@ -1,5 +1,5 @@
 import { MODULE_ID, WARLOCK_FAVOR_FLAG, SPHERE_NAME_FLAG } from './constants.js';
-import { getTierFromLevel, getFavorBonus, escapeHtml, sendStyledChatMessage } from './helpers.js';
+import { getTierFromLevel, getFavorBonus, escapeHtml, sendStyledChatMessage, resolveCharacterActor } from './helpers.js';
 
 /** @type {number} Fixed number of Favor Spheres tracked by the item's clickable pips. */
 const MAX_SPHERES = 6;
@@ -14,16 +14,6 @@ export function isWarlockFavorItem(item) {
     return item?.type === 'feature' && item.getFlag(MODULE_ID, WARLOCK_FAVOR_FLAG) === true;
 }
 
-/**
- * Resolves the character actor a macro call should act on: the controlled
- * token's actor, falling back to the user's assigned character.
- * @returns {foundry.documents.Actor|null} A "character" type actor, or null if none found.
- */
-function _resolveCharacterActor() {
-    const actor = canvas.tokens.controlled[0]?.actor ?? game.user.character;
-    return actor?.type === 'character' ? actor : null;
-}
-
 // ── Macro entry point ──────────────────────────────────────────
 
 /**
@@ -33,7 +23,7 @@ function _resolveCharacterActor() {
  * @returns {Promise<void>}
  */
 export async function WarlockFavor() {
-    const actor = _resolveCharacterActor();
+    const actor = resolveCharacterActor();
     if (!actor) {
         ui.notifications.warn('Select a token or assign a character to use Warlock Favor.');
         return;

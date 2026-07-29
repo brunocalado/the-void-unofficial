@@ -6,8 +6,13 @@
  * it under the terms of the GNU General Public License version 3.
  */
 
-import { MODULE_ID, ORDER_OF_THE_LYCAN_FLAG } from './constants.js';
-import { escapeHtml, sendStyledChatMessage } from './helpers.js';
+import {
+    MODULE_ID,
+    ORDER_OF_THE_LYCAN_FLAG,
+    HYBRID_FORM_APPEARANCE_FLAG,
+    HYBRID_FORM_TOKEN_SNAPSHOT_FLAG
+} from './constants.js';
+import { escapeHtml, sendStyledChatMessage, resolveCharacterActor } from './helpers.js';
 
 /**
  * Names of the Active Effects that represent the Hybrid Form: the base form and the two
@@ -26,6 +31,43 @@ const FEATURE_TIERS = { foundation: 1, specialization: 2, mastery: 3 };
 
 /** @type {string} Icon shown on the transform button. Font Awesome has no `fa-wolf`; this brand glyph is a wolf head. */
 const WOLF_ICON_CLASS = 'fa-brands fa-wolf-pack-battalion';
+
+/**
+ * Marker authors write into a Hybrid Form item's description to declare the token
+ * image for that tier, e.g. `Set Token Image with {{{modules/the-void-unofficial/tokens/wolf.webp}}}`.
+ * Keeping the image out of code lets each tier (base/Feral/Apex Hunter) show a
+ * different portrait just by editing the compendium item's description.
+ * @type {RegExp}
+ */
+const TOKEN_IMAGE_MARKER = /Set Token Image with\s*\{\{\{(.+?)\}\}\}/i;
+
+/**
+ * Priority given to every `token.*` Active Effect change this module writes.
+ * Matches the core default priority of the `override` change type; kept explicit
+ * so the change sort in `TokenDocument#applyActiveEffects` is always well-defined.
+ * @type {number}
+ */
+const APPEARANCE_CHANGE_PRIORITY = 50;
+
+/** @type {string} Fixed art scale applied to the token while in Hybrid Form; the grid footprint itself never changes. */
+const APPEARANCE_IMAGE_SCALE = 1.5;
+
+/** @type {string} Icon shown on the Hybrid Form appearance effect itself (Effects tab / status icon) — always this, regardless of the tier's token image. */
+const APPEARANCE_EFFECT_ICON = 'icons/creatures/mammals/wolf-shadow-black.webp';
+
+/**
+ * Light emitted by the token while in Hybrid Form (a faint bloodred glow).
+ * @type {{dim: number, bright: number, color: string, alpha: number, animationType: string, animationSpeed: number, animationIntensity: number}}
+ */
+const APPEARANCE_LIGHT = {
+    dim: 5,
+    bright: 0,
+    color: '#7a0000',
+    alpha: 0.5,
+    animationType: 'pulse',
+    animationSpeed: 5,
+    animationIntensity: 5
+};
 
 /**
  * Finds the actor's Order of the Lycan subclass item. Detection is driven by the module
@@ -163,6 +205,204 @@ async function _applyHybridFormEffects(actor, active) {
             ActiveEffect.implementation.updateDocuments(updates, { parent })
         )
     );
+
+    await _applyHybridFormAppearance(actor, enabled);
+}
+
+// ── Token appearance (image, scale, light) ───────────────────────
+
+/**
+ * Finds this module's own Hybrid Form appearance effect on the actor, if any.
+ * Kept separate from the subclass's tiered gameplay effects (see
+ * {@link HYBRID_FORM_EFFECT_NAMES}) so replacing or removing it never touches
+ * those.
+ * @param {foundry.documents.Actor} actor
+ * @returns {foundry.documents.ActiveEffect|null}
+ */
+function _getAppearanceEffect(actor) {
+    return actor.effects.find(effect => effect.getFlag(MODULE_ID, HYBRID_FORM_APPEARANCE_FLAG) === true) ?? null;
+}
+
+/**
+ * Reads the token image path out of a Hybrid Form item's description, looking
+ * for the `Set Token Image with {{{path}}}` marker (see {@link TOKEN_IMAGE_MARKER}).
+ * @param {string|null|undefined} description - The item's `system.description` HTML.
+ * @returns {string|null} The declared path, or null if the marker is missing.
+ */
+function _extractTokenImagePath(description) {
+    return TOKEN_IMAGE_MARKER.exec(description ?? '')?.[1]?.trim() || null;
+}
+
+/**
+ * Builds the Active Effect `changes` that override the token's light.
+ *
+ * Every key is prefixed `token.` — a native v14 Active Effect feature, independent
+ * of the Daggerheart system, where core strips the `token.` prefix and applies the
+ * change straight to the placed `TokenDocument` (every scene, for every token of
+ * this actor) instead of to the Actor itself. Confirmed against this module's
+ * companion `light-sources` module, which drives a token's light the same way.
+ * @returns {object[]} The change entries for `ActiveEffect#system#changes`.
+ */
+function _buildLightChanges() {
+    const entry = (key, value) => ({
+        key,
+        value,
+        type: 'override',
+        phase: 'initial',
+        priority: APPEARANCE_CHANGE_PRIORITY
+    });
+
+    return [
+        entry('token.light.dim', APPEARANCE_LIGHT.dim),
+        entry('token.light.bright', APPEARANCE_LIGHT.bright),
+        entry('token.light.color', APPEARANCE_LIGHT.color),
+        entry('token.light.alpha', APPEARANCE_LIGHT.alpha),
+        entry('token.light.animation.type', APPEARANCE_LIGHT.animationType),
+        entry('token.light.animation.speed', APPEARANCE_LIGHT.animationSpeed),
+        entry('token.light.animation.intensity', APPEARANCE_LIGHT.animationIntensity)
+    ];
+}
+
+/**
+ * Actor#getDependentTokens can hand back tokens that have already been removed
+ * (`_id: null`, `_destroyed: true`) instead of omitting them — a known Foundry
+ * quirk the Daggerheart system itself works around the same way (see its
+ * `toggleClowncar`). Updating one of those stale entries throws "id does not
+ * exist in the EmbeddedCollection collection", so they're filtered out here
+ * before any Token update is attempted.
+ * @param {foundry.documents.Actor} actor
+ * @returns {foundry.documents.TokenDocument[]}
+ */
+function _getLiveDependentTokens(actor) {
+    return actor.getDependentTokens().filter(token => token._id && !token._destroyed);
+}
+
+/**
+ * Overrides every dependent token's texture (image + 1.5x scale) with a direct,
+ * persisted update, snapshotting each token's own current texture first (once —
+ * a snapshot already present is left untouched, so re-entering Hybrid Form at a
+ * different tier can't clobber it with an already-transformed texture).
+ *
+ * Unlike the light, this cannot be done through an Active Effect `token.texture.*`
+ * override: the change lands in the token's *derived* data, which the canvas has
+ * no reason to redraw from (nothing about a redraw is normally triggered by an
+ * Active Effect being created/updated) — the new art was only ever visible
+ * transiently, while dragging the token forced a fresh read. A genuine document
+ * update fires the normal `_onUpdate` → render-flags → redraw pipeline instead.
+ *
+ * @param {foundry.documents.Actor} actor
+ * @param {string} imagePath - Token image path extracted from the tier's item description.
+ * @returns {Promise<void>}
+ */
+async function _applyTokenTexture(actor, imagePath) {
+    const byScene = new Map();
+
+    for (const token of _getLiveDependentTokens(actor)) {
+        const updates = byScene.get(token.parent) ?? [];
+        updates.push({
+            _id: token.id,
+            texture: { src: imagePath, scaleX: APPEARANCE_IMAGE_SCALE, scaleY: APPEARANCE_IMAGE_SCALE },
+            ...(token.getFlag(MODULE_ID, HYBRID_FORM_TOKEN_SNAPSHOT_FLAG)
+                ? {}
+                : {
+                      [`flags.${MODULE_ID}.${HYBRID_FORM_TOKEN_SNAPSHOT_FLAG}`]: {
+                          src: token.texture.src,
+                          scaleX: token.texture.scaleX,
+                          scaleY: token.texture.scaleY
+                      }
+                  })
+        });
+        byScene.set(token.parent, updates);
+    }
+
+    await Promise.all(
+        [...byScene].map(([scene, updates]) => TokenDocument.implementation.updateDocuments(updates, { parent: scene }))
+    );
+}
+
+/**
+ * Restores every dependent token's texture from its Hybrid Form snapshot (see
+ * {@link _applyTokenTexture}) and clears the snapshot flag. Tokens without a
+ * snapshot are left alone — they were never transformed to begin with.
+ * @param {foundry.documents.Actor} actor
+ * @returns {Promise<void>}
+ */
+async function _revertTokenTexture(actor) {
+    const byScene = new Map();
+
+    for (const token of _getLiveDependentTokens(actor)) {
+        const snapshot = token.getFlag(MODULE_ID, HYBRID_FORM_TOKEN_SNAPSHOT_FLAG);
+        if (!snapshot) continue;
+
+        const updates = byScene.get(token.parent) ?? [];
+        updates.push({
+            _id: token.id,
+            texture: snapshot,
+            // The dotted `-=key` deletion syntax is deprecated in v14; a nested
+            // ForcedDeletion sentinel is the replacement it now asks for.
+            flags: { [MODULE_ID]: { [HYBRID_FORM_TOKEN_SNAPSHOT_FLAG]: new foundry.data.operators.ForcedDeletion() } }
+        });
+        byScene.set(token.parent, updates);
+    }
+
+    await Promise.all(
+        [...byScene].map(([scene, updates]) => TokenDocument.implementation.updateDocuments(updates, { parent: scene }))
+    );
+}
+
+/**
+ * Creates, refreshes or removes the actor's Hybrid Form appearance: the token's
+ * image/scale (direct token update, see {@link _applyTokenTexture}) and its light
+ * (a dedicated Active Effect, see {@link _buildLightChanges}).
+ *
+ * The light effect uses `type: 'base'`, pinning it to core's own Active Effect
+ * data model rather than whatever subtype the system registers, so
+ * `system.changes` keeps the shape this code writes regardless of how
+ * Daggerheart reshapes its own effects. Deleting it (rather than merely
+ * disabling it) is what reverts the light: core restores the token's own stored
+ * light once the override is gone, so — unlike the texture — no snapshot is
+ * needed for it.
+ *
+ * @param {foundry.documents.Actor} actor
+ * @param {foundry.documents.ActiveEffect|null} enabledEffect - The tier-appropriate
+ *   Hybrid Form effect just enabled, or null when reverting to human form.
+ * @returns {Promise<void>}
+ */
+async function _applyHybridFormAppearance(actor, enabledEffect) {
+    const existingLightEffect = _getAppearanceEffect(actor);
+
+    if (!enabledEffect) {
+        if (existingLightEffect) await actor.deleteEmbeddedDocuments('ActiveEffect', [existingLightEffect.id]);
+        await _revertTokenTexture(actor);
+        return;
+    }
+
+    const imagePath = _extractTokenImagePath(enabledEffect.parent?.system?.description);
+    if (!imagePath) {
+        ui.notifications.warn(
+            `"${enabledEffect.parent?.name ?? enabledEffect.name}" has no "Set Token Image with {{{path}}}" marker in its description, so the token appearance will not change.`
+        );
+        if (existingLightEffect) await actor.deleteEmbeddedDocuments('ActiveEffect', [existingLightEffect.id]);
+        await _revertTokenTexture(actor);
+        return;
+    }
+
+    await _applyTokenTexture(actor, imagePath);
+
+    const data = {
+        name: 'Hybrid Form — Appearance',
+        img: APPEARANCE_EFFECT_ICON,
+        type: 'base',
+        transfer: false,
+        system: { changes: _buildLightChanges() },
+        flags: { [MODULE_ID]: { [HYBRID_FORM_APPEARANCE_FLAG]: true } }
+    };
+
+    if (existingLightEffect) {
+        await actor.updateEmbeddedDocuments('ActiveEffect', [{ _id: existingLightEffect.id, ...data }]);
+    } else {
+        await actor.createEmbeddedDocuments('ActiveEffect', [data]);
+    }
 }
 
 /**
@@ -174,6 +414,29 @@ async function _applyHybridFormEffects(actor, active) {
  */
 export async function toggleHybridForm(actor) {
     await _applyHybridFormEffects(actor, !isInHybridForm(actor));
+}
+
+// ── Macro entry point ──────────────────────────────────────────
+
+/**
+ * Main entry point for the Hybrid Form macro. Can be called via Void.HybridForm()
+ * Does exactly what the actor sheet's wolf button does: toggles the acting
+ * character in or out of Hybrid Form.
+ * @returns {Promise<void>}
+ */
+export async function HybridForm() {
+    const actor = resolveCharacterActor();
+    if (!actor) {
+        ui.notifications.warn('Select a token or assign a character to use Hybrid Form.');
+        return;
+    }
+
+    if (!isOrderOfTheLycan(actor)) {
+        ui.notifications.warn(`${actor.name} is not an Order of the Lycan.`);
+        return;
+    }
+
+    await toggleHybridForm(actor);
 }
 
 // ── The Beast Within: Hope gains cost Stress ─────────────────────

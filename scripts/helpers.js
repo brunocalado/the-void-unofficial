@@ -4,6 +4,16 @@
  */
 
 /**
+ * Resolves the character actor a macro call should act on: the controlled
+ * token's actor, falling back to the user's assigned character.
+ * @returns {foundry.documents.Actor|null} A "character" type actor, or null if none found.
+ */
+export function resolveCharacterActor() {
+    const actor = canvas.tokens.controlled[0]?.actor ?? game.user.character;
+    return actor?.type === 'character' ? actor : null;
+}
+
+/**
  * Determines the Void tier for a given character level.
  * Tier bands: level 1 -> tier 1; 2-4 -> tier 2; 5-8 -> tier 3; 9-10 -> tier 4.
  * @param {number} level - The character's current level (system.levelData.level.current).
