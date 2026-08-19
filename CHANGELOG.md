@@ -1,3 +1,7 @@
+# 1.3.0
+
+https://github.com/brunocalado/the-void-unofficial/issues/8
+
 # 1.2.9
 
 Fixed blood hunter

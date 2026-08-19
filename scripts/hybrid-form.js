@@ -52,7 +52,14 @@ const APPEARANCE_CHANGE_PRIORITY = 50;
 /** @type {string} Fixed art scale applied to the token while in Hybrid Form; the grid footprint itself never changes. */
 const APPEARANCE_IMAGE_SCALE = 1.5;
 
-/** @type {string} Icon shown on the Hybrid Form appearance effect itself (Effects tab / status icon) — always this, regardless of the tier's token image. */
+/**
+ * Icon shown on the Hybrid Form appearance effect itself (Effects tab / status icon) —
+ * always this, regardless of the tier's token image. Doubles as the fallback token
+ * texture (see {@link _applyHybridFormAppearance}) when a tier's item has no
+ * `Set Token Image with {{{path}}}` marker, or the marker's path is invalid: it's a
+ * core Foundry icon, so it's guaranteed to exist without the module shipping its own art.
+ * @type {string}
+ */
 const APPEARANCE_EFFECT_ICON = 'icons/creatures/mammals/wolf-shadow-black.webp';
 
 /**
@@ -291,7 +298,11 @@ function _getLiveDependentTokens(actor) {
  * update fires the normal `_onUpdate` → render-flags → redraw pipeline instead.
  *
  * @param {foundry.documents.Actor} actor
- * @param {string} imagePath - Token image path extracted from the tier's item description.
+ * @param {string} imagePath - Token image path, either extracted from the tier's item
+ *   description or the fallback default (see {@link _applyHybridFormAppearance}).
+ * @throws Rejects with the underlying validation error if the Foundry schema rejects
+ *   `imagePath` (e.g. it has no recognized image/video file extension), letting the
+ *   caller decide whether to retry with a fallback path.
  * @returns {Promise<void>}
  */
 async function _applyTokenTexture(actor, imagePath) {
@@ -363,6 +374,13 @@ async function _revertTokenTexture(actor) {
  * light once the override is gone, so — unlike the texture — no snapshot is
  * needed for it.
  *
+ * The token image itself always falls back to {@link APPEARANCE_EFFECT_ICON} —
+ * both when the tier's item has no `Set Token Image with {{{path}}}` marker at
+ * all, and when the marker's path is set but rejected by the TokenDocument
+ * schema (e.g. the shipped compendium item still has the literal `{{{path}}}`
+ * placeholder, never replaced with real art). Either way Hybrid Form still
+ * visibly does something instead of throwing or silently no-opping.
+ *
  * @param {foundry.documents.Actor} actor
  * @param {foundry.documents.ActiveEffect|null} enabledEffect - The tier-appropriate
  *   Hybrid Form effect just enabled, or null when reverting to human form.
@@ -377,17 +395,24 @@ async function _applyHybridFormAppearance(actor, enabledEffect) {
         return;
     }
 
-    const imagePath = _extractTokenImagePath(enabledEffect.parent?.system?.description);
-    if (!imagePath) {
-        ui.notifications.warn(
-            `"${enabledEffect.parent?.name ?? enabledEffect.name}" has no "Set Token Image with {{{path}}}" marker in its description, so the token appearance will not change.`
+    const itemName = enabledEffect.parent?.name ?? enabledEffect.name;
+    const requestedImagePath = _extractTokenImagePath(enabledEffect.parent?.system?.description);
+    if (!requestedImagePath) {
+        ui.notifications.info(
+            `"${itemName}" has no "Set Token Image with {{{path}}}" marker in its description; using the default wolf art instead.`
         );
-        if (existingLightEffect) await actor.deleteEmbeddedDocuments('ActiveEffect', [existingLightEffect.id]);
-        await _revertTokenTexture(actor);
-        return;
     }
 
-    await _applyTokenTexture(actor, imagePath);
+    try {
+        await _applyTokenTexture(actor, requestedImagePath ?? APPEARANCE_EFFECT_ICON);
+    } catch (err) {
+        // Nothing left to fall back to if the default itself was rejected — surface it.
+        if (!requestedImagePath) throw err;
+
+        console.warn(`${MODULE_ID} | "${itemName}" has an invalid Set Token Image path ("${requestedImagePath}"); using the default wolf art instead.`, err);
+        ui.notifications.info(`"${itemName}" has an invalid Set Token Image path; using the default wolf art instead.`);
+        await _applyTokenTexture(actor, APPEARANCE_EFFECT_ICON);
+    }
 
     const data = {
         name: 'Hybrid Form — Appearance',
