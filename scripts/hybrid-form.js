@@ -241,6 +241,25 @@ function _extractTokenImagePath(description) {
 }
 
 /**
+ * Whether `path` would pass the `TokenDocument` schema's own `texture.src` validation
+ * (file extension, wildcard support, etc.) — reusing the live field's `validate()`
+ * rather than reimplementing Foundry's extension rules.
+ *
+ * Checked proactively, before ever handing the path to `updateDocuments`: confirmed
+ * live (v14.367) that a per-document schema validation failure does not reject the
+ * `updateDocuments` promise — Foundry logs the error and notifies the user
+ * internally, then silently drops that document from the batch and resolves
+ * normally. A try/catch around the update would therefore never run; the only way
+ * to catch a bad path (e.g. the shipped item's `{{{path}}}` marker left unedited)
+ * is to check it before the call.
+ * @param {string} path
+ * @returns {boolean}
+ */
+function _isValidTokenTexturePath(path) {
+    return TokenDocument.schema.getField('texture.src').validate(path) === null;
+}
+
+/**
  * Builds the Active Effect `changes` that override the token's light.
  *
  * Every key is prefixed `token.` — a native v14 Active Effect feature, independent
@@ -298,11 +317,8 @@ function _getLiveDependentTokens(actor) {
  * update fires the normal `_onUpdate` → render-flags → redraw pipeline instead.
  *
  * @param {foundry.documents.Actor} actor
- * @param {string} imagePath - Token image path, either extracted from the tier's item
- *   description or the fallback default (see {@link _applyHybridFormAppearance}).
- * @throws Rejects with the underlying validation error if the Foundry schema rejects
- *   `imagePath` (e.g. it has no recognized image/video file extension), letting the
- *   caller decide whether to retry with a fallback path.
+ * @param {string} imagePath - Token image path, already validated by the caller
+ *   (see {@link _isValidTokenTexturePath} and {@link _applyHybridFormAppearance}).
  * @returns {Promise<void>}
  */
 async function _applyTokenTexture(actor, imagePath) {
@@ -397,22 +413,21 @@ async function _applyHybridFormAppearance(actor, enabledEffect) {
 
     const itemName = enabledEffect.parent?.name ?? enabledEffect.name;
     const requestedImagePath = _extractTokenImagePath(enabledEffect.parent?.system?.description);
+
+    let imagePath = APPEARANCE_EFFECT_ICON;
     if (!requestedImagePath) {
         ui.notifications.info(
             `"${itemName}" has no "Set Token Image with {{{path}}}" marker in its description; using the default wolf art instead.`
         );
+    } else if (!_isValidTokenTexturePath(requestedImagePath)) {
+        ui.notifications.info(
+            `"${itemName}" has an invalid Set Token Image path ("${requestedImagePath}"); using the default wolf art instead.`
+        );
+    } else {
+        imagePath = requestedImagePath;
     }
 
-    try {
-        await _applyTokenTexture(actor, requestedImagePath ?? APPEARANCE_EFFECT_ICON);
-    } catch (err) {
-        // Nothing left to fall back to if the default itself was rejected — surface it.
-        if (!requestedImagePath) throw err;
-
-        console.warn(`${MODULE_ID} | "${itemName}" has an invalid Set Token Image path ("${requestedImagePath}"); using the default wolf art instead.`, err);
-        ui.notifications.info(`"${itemName}" has an invalid Set Token Image path; using the default wolf art instead.`);
-        await _applyTokenTexture(actor, APPEARANCE_EFFECT_ICON);
-    }
+    await _applyTokenTexture(actor, imagePath);
 
     const data = {
         name: 'Hybrid Form — Appearance',
