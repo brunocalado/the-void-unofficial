@@ -2,7 +2,7 @@
   "id": "the-void-unofficial",
   "title": "Void for Daggerheart",
   "description": "Playtest the Void content!",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "compatibility": {
     "minimum": "14",
     "verified": "14",

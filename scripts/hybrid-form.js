@@ -256,7 +256,9 @@ function _extractTokenImagePath(description) {
  * @returns {boolean}
  */
 function _isValidTokenTexturePath(path) {
-    return TokenDocument.schema.getField('texture.src').validate(path) === null;
+    // DataField#validate resolves to `undefined` on success and a DataModelValidationFailure
+    // instance on failure — never `null` — so the comparison must be against `undefined`.
+    return TokenDocument.schema.getField('texture.src').validate(path) === undefined;
 }
 
 /**

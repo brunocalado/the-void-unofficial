@@ -1,3 +1,7 @@
+# 1.3.3
+
+https://github.com/brunocalado/the-void-unofficial/issues/10
+
 # 1.3.2
 
 - fixed a validation error when transforming into Hybrid Form if the tier's item has no (or an invalid) `Set Token Image with {{{path}}}` marker, e.g. the placeholder was never replaced with real art; the token now falls back to a default wolf image instead of erroring
