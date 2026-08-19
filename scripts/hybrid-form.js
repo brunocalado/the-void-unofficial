@@ -304,10 +304,11 @@ function _getLiveDependentTokens(actor) {
 }
 
 /**
- * Overrides every dependent token's texture (image + 1.5x scale) with a direct,
- * persisted update, snapshotting each token's own current texture first (once —
- * a snapshot already present is left untouched, so re-entering Hybrid Form at a
- * different tier can't clobber it with an already-transformed texture).
+ * Overrides every dependent token's texture (image + 1.5x scale, mirror preserved)
+ * with a direct, persisted update, snapshotting each token's own current texture
+ * first (once — a snapshot already present is left untouched, so re-entering
+ * Hybrid Form at a different tier can't clobber it with an already-transformed
+ * texture).
  *
  * Unlike the light, this cannot be done through an Active Effect `token.texture.*`
  * override: the change lands in the token's *derived* data, which the canvas has
@@ -315,6 +316,13 @@ function _getLiveDependentTokens(actor) {
  * Active Effect being created/updated) — the new art was only ever visible
  * transiently, while dragging the token forced a fresh read. A genuine document
  * update fires the normal `_onUpdate` → render-flags → redraw pipeline instead.
+ *
+ * `rotation` is a separate TokenDocument field this function never touches, so it
+ * always survives the transform untouched. Mirroring is different: it's encoded as
+ * the *sign* of `texture.scaleX`/`scaleY` rather than a dedicated field, so it has
+ * to be read off the token's current texture and carried over explicitly — applying
+ * a bare positive {@link APPEARANCE_IMAGE_SCALE} would silently un-mirror every
+ * flipped token on every transform.
  *
  * @param {foundry.documents.Actor} actor
  * @param {string} imagePath - Token image path, already validated by the caller
@@ -328,7 +336,11 @@ async function _applyTokenTexture(actor, imagePath) {
         const updates = byScene.get(token.parent) ?? [];
         updates.push({
             _id: token.id,
-            texture: { src: imagePath, scaleX: APPEARANCE_IMAGE_SCALE, scaleY: APPEARANCE_IMAGE_SCALE },
+            texture: {
+                src: imagePath,
+                scaleX: Math.sign(token.texture.scaleX || 1) * APPEARANCE_IMAGE_SCALE,
+                scaleY: Math.sign(token.texture.scaleY || 1) * APPEARANCE_IMAGE_SCALE
+            },
             ...(token.getFlag(MODULE_ID, HYBRID_FORM_TOKEN_SNAPSHOT_FLAG)
                 ? {}
                 : {
